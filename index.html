@@ -43,7 +43,7 @@
     }
 
     .nav-links a { text-decoration: none; color: var(--hkust-navy); font-weight: 600; padding: 6px 10px; border-radius: 8px; transition: background 0.15s ease, color 0.15s ease; }
-    .nav-links a:hover { background: rgba(15, 60, 140, 0.1); color: var(--hkust-blue); }
+    .nav-links a:hover { background: rgba(181, 138, 28, 0.14); color: var(--hkust-blue); }
 
     main {
       max-width: 1180px;
@@ -82,14 +82,14 @@
     .hero-content { position: relative; display: grid; gap: 14px; }
 
     .photo-box {
-      background: rgba(11, 47, 106, 0.08);
+      background: linear-gradient(135deg, rgba(181, 138, 28, 0.12), rgba(11, 47, 106, 0.08));
       border-radius: 14px;
       min-height: 220px;
       display: grid;
       place-items: center;
       color: var(--hkust-navy);
       font-weight: 700;
-      border: 1px solid rgba(11, 47, 106, 0.05);
+      border: 1px solid rgba(181, 138, 28, 0.3);
     }
 
     .card-grid {
@@ -102,17 +102,17 @@
 
     .list {
       display: grid;
-      gap: 14px;
+      gap: 10px;
       margin-top: 10px;
     }
 
-    .list-item { padding: 14px; border-radius: 10px; background: #fff; border: none; box-shadow: none; display: grid; gap: 6px; }
+    .list-item { padding: 0; border-radius: 0; background: transparent; border: none; box-shadow: none; display: block; color: var(--text); }
 
-    .list-item strong { color: var(--hkust-blue); }
-    .list-item small { color: #5c6270; }
+    .news-date { color: var(--hkust-gold); font-weight: 700; margin-right: 8px; }
+    .list-item .headline { color: var(--hkust-blue); font-weight: 700; }
 
-    .pub-card { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 14px; border-radius: 12px; background: #fff; border: none; box-shadow: none; }
-    .pub-thumb { border-radius: 10px; background: rgba(11, 47, 106, 0.12); color: var(--hkust-navy); display: grid; place-items: center; padding: 12px; font-weight: 700; text-align: center; min-height: 140px; }
+    .pub-card { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 0; border-radius: 0; background: transparent; border: none; box-shadow: none; }
+    .pub-thumb { border-radius: 10px; background: linear-gradient(135deg, rgba(11, 47, 106, 0.16), rgba(181, 138, 28, 0.18)); color: var(--hkust-navy); display: grid; place-items: center; padding: 12px; font-weight: 700; text-align: center; min-height: 140px; }
 
     .pub-card h3 {
       margin: 0 0 6px;
@@ -133,12 +133,13 @@
     }
 
     .tag {
-      background: rgba(11, 47, 106, 0.08);
-      color: var(--hkust-blue);
+      background: rgba(181, 138, 28, 0.16);
+      color: var(--hkust-navy);
       padding: 6px 10px;
       border-radius: 10px;
       font-weight: 600;
       font-size: 0.88rem;
+      border: 1px solid rgba(181, 138, 28, 0.4);
     }
 
     .cta { text-align: center; padding: 22px; border-radius: 12px; border: 1px solid rgba(11, 47, 106, 0.05); background: #fff; box-shadow: none; }
@@ -196,19 +197,13 @@
       <h2>News</h2>
       <div class="list">
         <div class="list-item">
-          <small>Month YYYY</small>
-          <strong>Headline placeholder for a recent achievement or announcement.</strong>
-          <span>1–2 sentence detail placeholder.</span>
+          <span class="news-date">Month YYYY</span><span class="headline">Headline placeholder for a recent achievement or announcement.</span>
         </div>
         <div class="list-item">
-          <small>Month YYYY</small>
-          <strong>Headline placeholder for invited talk, grant, or award.</strong>
-          <span>1–2 sentence detail placeholder.</span>
+          <span class="news-date">Month YYYY</span><span class="headline">Headline placeholder for invited talk, grant, or award.</span>
         </div>
         <div class="list-item">
-          <small>Month YYYY</small>
-          <strong>Headline placeholder for new publication or preprint.</strong>
-          <span>1–2 sentence detail placeholder.</span>
+          <span class="news-date">Month YYYY</span><span class="headline">Headline placeholder for new publication or preprint.</span>
         </div>
       </div>
     </section>
@@ -285,7 +280,6 @@
 
   <footer>
     <span>© 2024 Your Name · HKUST(GZ)</span>
-    <span>Last updated: Month YYYY</span>
   </footer>
 </body>
 </html>
