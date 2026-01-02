@@ -68,6 +68,18 @@
 
     p { color: #263142; }
 
+    .hero-name {
+      font-size: 1.95rem;
+      font-weight: 800;
+      color: var(--hkust-navy);
+    }
+
+    .bio-lead {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
     .hero {
       background: #fff;
       border-radius: 18px;
@@ -112,7 +124,7 @@
     .list-item .headline { color: var(--hkust-blue); font-weight: 700; }
 
     .pub-card { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 0; border-radius: 0; background: transparent; border: none; box-shadow: none; }
-    .pub-thumb { border-radius: 10px; background: linear-gradient(135deg, rgba(11, 47, 106, 0.16), rgba(181, 138, 28, 0.18)); color: var(--hkust-navy); display: grid; place-items: center; padding: 12px; font-weight: 700; text-align: center; min-height: 140px; }
+    .pub-thumb { border-radius: 10px; background: linear-gradient(135deg, rgba(11, 47, 106, 0.16), rgba(181, 138, 28, 0.18)); color: var(--hkust-navy); display: grid; place-items: center; padding: 10px; font-weight: 700; text-align: center; min-height: 110px; }
 
     .pub-card h3 {
       margin: 0 0 6px;
@@ -135,11 +147,15 @@
     .tag {
       background: rgba(181, 138, 28, 0.16);
       color: var(--hkust-navy);
-      padding: 6px 10px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.88rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
       border: 1px solid rgba(181, 138, 28, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1.2;
     }
 
     .cta { text-align: center; padding: 22px; border-radius: 12px; border: 1px solid rgba(11, 47, 106, 0.05); background: #fff; box-shadow: none; }
@@ -167,7 +183,7 @@
   <header>
     <nav>
       <div class="brand">
-        <span>Prof. Your Name</span>
+        <span>Xin Yang</span>
       </div>
       <div class="nav-links">
         <a href="#about">About</a>
@@ -182,8 +198,8 @@
   <main>
     <section class="hero" id="about">
       <div class="hero-content">
-        <h1>About Me</h1>
-        <p>Single-paragraph bio placeholder. Summarize your role as an incoming assistant professor at HKUST(GZ), your research vision, and the real-world impact you aim to create. Keep it concise and personable.</p>
+        <div class="hero-name"> About Me</div>
+        <p><span class="bio-lead">Xin Yang </span> is an incoming Assistant Professor at Hong Kong University of Science and Technology (Guangzhou) and currently a postdoctoral researcher at Rice University.Prior to this, he was a postdoctoral researcher at the University of Pennsylvania (2023-2025). He received his Ph.D. in Electrical and Computer Engineering from the National University of Singapore in 2023 and his bachelor's degree from the University of Electronic Science and Technology of China (UESTC).</p>
       </div>
       <div class="photo-box">Photo Placeholder</div>
     </section>
@@ -219,8 +235,6 @@
             <p>Brief 2–3 sentence summary placeholder describing the core contribution and impact.</p>
             <div class="tags">
               <span class="tag">PDF</span>
-              <span class="tag">Code</span>
-              <span class="tag">Project</span>
             </div>
           </div>
         </div>
@@ -232,8 +246,6 @@
             <p>Brief 2–3 sentence summary placeholder describing the core contribution and impact.</p>
             <div class="tags">
               <span class="tag">PDF</span>
-              <span class="tag">Code</span>
-              <span class="tag">Project</span>
             </div>
           </div>
         </div>
@@ -245,8 +257,6 @@
             <p>Brief 2–3 sentence summary placeholder describing the core contribution and impact.</p>
             <div class="tags">
               <span class="tag">PDF</span>
-              <span class="tag">Code</span>
-              <span class="tag">Project</span>
             </div>
           </div>
         </div>
