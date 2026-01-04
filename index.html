@@ -16,7 +16,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Barlow', system-ui, sans-serif;
+      font-family: "Helvetica", Arial, sans-serif;
       color: var(--text);
       background: #f7f9fc;
       line-height: 1.65;
@@ -56,33 +56,40 @@
       padding: 40px 24px 80px;
       display: flex;
       flex-direction: column;
-      gap: 70px;
+      gap: 40px;
     }
 
     section { scroll-margin-top: 140px; }
 
     h1, h2, h3 {
-      font-family: 'Merriweather', serif;
+      font-family: "Helvetica", Arial, sans-serif;
       letter-spacing: 0.2px;
       color: var(--hkust-navy);
     }
 
     h1 { font-size: 2.8rem; margin-top: 8px; }
-    h2 { font-size: 1.95rem; margin: 8px 0 20px; }
+    h2 { font-size: 1.5rem; margin: 8px 0 20px; }
     h3 { font-size: 1.25rem; margin-bottom: 8px; }
 
-    p { color: #263142; }
+    p { color: #263142; font-size: 1rem; font-family: "Helvetica", Arial, sans-serif; }
 
     .hero-name {
-      font-size: 1.95rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--hkust-navy);
     }
 
     .bio-lead {
-      font-weight: 700;
-      font-size: 1.05rem;
+      font-weight: 600;
+      font-size: 1rem;
       color: var(--text);
+    }
+
+    .hero-content p,
+    #interests p,
+    .list-item {
+      font-size: 1rem;
+      text-align: justify;
     }
 
     .hero {
@@ -90,7 +97,7 @@
       border-radius: 18px;
       padding: 28px;
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
       gap: 24px;
       border: 1px solid rgba(11, 47, 106, 0.05);
       box-shadow: 0 8px 20px rgba(11, 47, 106, 0.04);
@@ -103,13 +110,14 @@
     .photo-box {
       background: linear-gradient(135deg, rgba(181, 138, 28, 0.12), rgba(11, 47, 106, 0.08));
       border-radius: 14px;
-      min-height: 220px;
+      min-height: 150px;
       display: grid;
       place-items: center;
       color: var(--hkust-navy);
       font-weight: 700;
       border: 1px solid rgba(181, 138, 28, 0.3);
       overflow: hidden;
+      max-width: 180px;
     }
 
     .photo-box img {
@@ -119,7 +127,7 @@
       display: block;
     }
 
-    .contact-stack { display: grid; gap: 6px; font-size: 0.96rem; color: var(--text); }
+    .contact-stack { display: grid; gap: 6px; font-size: 1rem; color: var(--text); }
     .contact-stack .title { font-weight: 700; color: var(--hkust-blue); }
     .contact-item { display: inline-flex; align-items: center; gap: 8px; }
     .icon {
@@ -218,7 +226,7 @@
         <a href="#about">About</a>
         <a href="#interests">Research</a>
         <a href="#news">News</a>
-        <a href="#publications">Selected Publications</a>
+        <a href="#publications">Publications</a>
         <a href="#join">Join Us</a>
       </div>
     </nav>
@@ -226,15 +234,9 @@
 
   <main>
     <section class="hero" id="about">
-      <div class="hero-content">
-        <div class="hero-name">Xin Yang (杨锌)</div>
-        <p>
-          I am an incoming Assistant Professor at the Hong Kong University of Science and Technology (Guangzhou) and currently a postdoctoral researcher at Rice University. Prior to this, I was a postdoctoral researcher at the University of Pennsylvania (2023–2025). I received my Ph.D. in Electrical and Computer Engineering from the National University of Singapore in 2023 and my bachelor’s degree from the University of Electronic Science and Technology of China (UESTC).
-          </p>
-      </div>
       <div class="hero-side">
         <div class="photo-box">
-          <img src="Asset/potrait.png" alt="Portrait of Xin Yang">
+          <img src="Asset/potrait.jpeg" alt="Portrait of Xin Yang">
         </div>
         <div class="contact-stack">
           <div class="title">Incoming Assistant Professor, HKUST(GZ)</div>
@@ -247,16 +249,25 @@
             <span>Office address placeholder</span>
           </div>
           <div class="contact-item">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 1 9l11 6 11-6-4-2.18V12h-2V6.45L12 3Zm0 12.36L5 11.4v4.4L12 19l7-3.2v-4.4l-7 3.56Z"/></svg>
-            <a href="#" style="color: var(--hkust-blue); font-weight: 700; text-decoration: none;">Google Scholar</a>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path d="M12 3 1 9l11 6 11-6-11-6Zm0 8.9L5.25 8.97 12 5.62l6.75 3.35L12 11.9Z"/>
+              <path d="M6 12.74v2.2L12 19l6-4.06v-2.2L12 16.2 6 12.74Z"/>
+            </svg>
+            <a href="#" style="color: var(--hkust-blue); text-decoration: none;">Google Scholar</a>
           </div>
         </div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-name">Xin Yang (杨锌)</div>
+        <p>
+          I am an incoming Assistant Professor at the Hong Kong University of Science and Technology (Guangzhou) and currently a postdoctoral researcher at Rice University. Prior to this, I was a postdoctoral researcher at the University of Pennsylvania (2023–2025). I received my Ph.D. in Electrical and Computer Engineering from the National University of Singapore in 2023 and my bachelor’s degree from the University of Electronic Science and Technology of China (UESTC).
+          </p>
       </div>
     </section>
 
     <section id="interests">
       <h2>Research Interests</h2>
-      <p>Single-paragraph overview placeholder describing your main research directions, core methods, and how they connect to impactful applications.</p>
+      <p>My research aims to advance wireless technologies to address real-world challenges in human health and improve quality of life. My recent work focuses on developing radio-frequency hardware systems and AI-driven signal processing algorithms that enable accurate, efficient, and unobtrusive healthcare anywhere, anytime. My research topics include non-contact sensing, flexible bioelectronics, edge computing, and the fabrication and integration of biomedical devices.</p>
     </section>
 
     <section id="news">
@@ -275,10 +286,10 @@
     </section>
 
     <section id="publications">
-      <h2>Selected Publications</h2>
+      <h2>SelectedPublications</h2>
       <div class="list">
         <div class="pub-card">
-          <div class="pub-thumb">Image<br>Placeholder</div>
+          <div class="pub-thumb"></div>
           <div>
             <h3>Paper Title Placeholder</h3>
             <div class="pub-meta">Authors placeholder · Venue/Year placeholder</div>
@@ -289,7 +300,7 @@
           </div>
         </div>
         <div class="pub-card">
-          <div class="pub-thumb">Image<br>Placeholder</div>
+          <div class="pub-thumb"></div>
           <div>
             <h3>Paper Title Placeholder</h3>
             <div class="pub-meta">Authors placeholder · Venue/Year placeholder</div>
@@ -300,7 +311,7 @@
           </div>
         </div>
         <div class="pub-card">
-          <div class="pub-thumb">Image<br>Placeholder</div>
+          <div class="pub-thumb"></div>
           <div>
             <h3>Paper Title Placeholder</h3>
             <div class="pub-meta">Authors placeholder · Venue/Year placeholder</div>
