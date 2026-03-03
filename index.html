@@ -54,6 +54,48 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      margin-left: auto;
+      border: 1px solid rgba(11, 47, 106, 0.16);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--hkust-navy);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-toggle-bar {
+      position: relative;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 999px;
+    }
+
+    .nav-toggle-bar::before,
+    .nav-toggle-bar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 999px;
+    }
+
+    .nav-toggle-bar::before {
+      top: -6px;
+    }
+
+    .nav-toggle-bar::after {
+      top: 6px;
     }
 
     .nav-links a { text-decoration: none; color: var(--hkust-navy); font-weight: 600; padding: 6px 10px; border-radius: 8px; transition: background 0.15s ease, color 0.15s ease; }
@@ -286,13 +328,65 @@
       border-top: 1px solid rgba(11, 47, 106, 0.14);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; }
+      .bio-photo {
+        max-width: min(280px, 74vw);
+        max-height: none;
+        margin: 0 auto 12px;
+      }
       .pub-card { grid-template-columns: 1fr; }
-      .pub-thumb { min-height: 120px; }
+      .pub-thumb {
+        width: min(300px, 78vw);
+        min-height: 120px;
+        margin: 0 auto 12px;
+      }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 980px) {
+      body {
+        padding-top: 96px;
+      }
+
+      nav {
+        padding: 10px 16px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        font-size: 1.1rem;
+      }
+
+      .brand-logo {
+        height: 38px;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding-top: 8px;
+      }
+
+      .nav-links.is-open {
+        display: flex;
+      }
+
+      .nav-links a {
+        width: 100%;
+        padding: 8px 10px;
+      }
+
+      main {
+        padding: 28px 16px 56px;
+      }
+
       .hero-side { grid-template-columns: 1fr; }
     }
   </style>
@@ -304,7 +398,10 @@
         <img class="brand-logo" src="Asset/logo.png" alt="HKUST(GZ) logo">
         <span>Xin Yang</span>
       </div>
-      <div class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <div class="nav-links" id="site-menu">
         <a href="#about" data-target="about">About</a>
         <a href="#interests" data-target="interests">Research</a>
         <a href="#news" data-target="news">News</a>
@@ -352,8 +449,7 @@
       <p>My research aims to advance wireless technologies to address real-world challenges in human health and improve quality of life. My recent work focuses on developing radio-frequency hardware systems and AI-driven signal processing algorithms that enable accurate, efficient, and unobtrusive healthcare anywhere, anytime. My research topics include non-contact sensing, flexible bioelectronics, edge computing, and the fabrication and integration of biomedical devices.</p>
     </section>
 
-    <p class="join-alert">I’m always looking for motivated and creative postdocs, PhD students, RAs, and visiting students to join my group. For details, please see <a href="#join">Join Us</a>. Thank you!</p>
-    </p>
+    <p class="join-alert">I’m always looking for motivated and creative postdocs, PhD students, RAs, and visiting students to join my group. For details, please see <a href="#join" data-target="join">Join Us</a>. Thank you!</p>
 
     <section id="news">
       <h2>News</h2>
@@ -577,9 +673,9 @@
         </div>
         <div>
           <h3>Postdocs</h3>
-          Welcome applications from innovative researchers interested in building next-generation systems for wireless sensing and wearable/implantable bioelectronics. Specific research topics will be co-developed to match the candidate’s strengths and our group’s priorities. Applicants with a Ph.D. in Electrical Engineering, Materials Science, Biomedical Engineering, Computer Science, or a closely related field are encouraged to apply. </div>
+          <p>Welcome applications from innovative researchers interested in building next-generation systems for wireless sensing and wearable/implantable bioelectronics. Specific research topics will be co-developed to match the candidate’s strengths and our group’s priorities. Applicants with a Ph.D. in Electrical Engineering, Materials Science, Biomedical Engineering, Computer Science, or a closely related field are encouraged to apply.</p>
           <p>If you’re interested in joining our team, please <a href="mailto:xiny@hkust-gz.edu.cn">email</a> me to learn more and discuss potential opportunities.</p>
-          <div>
+        </div>
       </div>
     </section>
   </main>
@@ -588,11 +684,34 @@
     <span>© 2026 Xin Yang</span>
   </footer>
   <script>
-    document.querySelectorAll(".nav-links a[data-target]").forEach((link) => {
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const mobileQuery = window.matchMedia("(max-width: 980px)");
+
+    function closeMobileMenu() {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileQuery.addEventListener("change", () => {
+      if (!mobileQuery.matches) {
+        closeMobileMenu();
+      }
+    });
+
+    document.querySelectorAll("a[data-target]").forEach((link) => {
       link.addEventListener("click", (event) => {
         event.preventDefault();
         const target = document.getElementById(link.dataset.target);
         if (target) {
+          if (mobileQuery.matches) {
+            closeMobileMenu();
+          }
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
