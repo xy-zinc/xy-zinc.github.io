@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xin Yang</title>
+  <link rel="icon" href="Asset/cropped-cropped-favicon-32x32.png" sizes="32x32">
+  <link rel="icon" href="Asset/cropped-cropped-favicon-192x192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="Asset/cropped-cropped-favicon-180x180.png">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hkust-navy: #0b2f6a;
+      --hkust-blue: #0f3c8c;
+      --hkust-gold: #b58a1c;
+      --text: #111a2c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Helvetica", Arial, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.4;
+      overflow-x: hidden;
+      padding-top: 120px; /* reserve space for fixed header, even after long scroll */
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: #fff;
+      border-bottom: 1px solid rgba(11, 47, 106, 0.1);
+      box-shadow: 0 6px 14px rgba(11, 47, 106, 0.08);
+    }
+
+    nav { max-width: 1180px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--hkust-navy); letter-spacing: 0.4px; font-size: 1.35rem; }
+
+    .brand-logo {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a { text-decoration: none; color: var(--hkust-navy); font-weight: 600; padding: 6px 10px; border-radius: 8px; transition: background 0.15s ease, color 0.15s ease; }
+    .nav-links a:hover { background: rgba(181, 138, 28, 0.14); color: var(--hkust-blue); }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    section { scroll-margin-top: 140px; }
+
+    h1, h2, h3 {
+      font-family: "Helvetica", Arial, sans-serif;
+      letter-spacing: 0.2px;
+      color: var(--hkust-navy);
+    }
+
+    h1 { font-size: 2.8rem; margin-top: 8px; }
+    h2 { font-size: 1.5rem; margin: 8px 0 8px; }
+    h3 { font-size: 1rem; margin-bottom: 8px; }
+
+    p { color: #263142; font-size: 1rem; font-family: "Helvetica", Arial, sans-serif; }
+
+    .hero-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--hkust-navy);
+    }
+
+    .hero-name-cn {
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    }
+
+    .bio-lead {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .hero-content p,
+    #interests p,
+    .list-item {
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .hero {
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 24px;
+      border: none;
+      box-shadow: none;
+    }
+
+    .hero-content { position: relative; display: grid; gap: 14px; }
+
+    .hero-side { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+
+    .bio-photo {
+      border-radius: 0;
+      max-width: 180px;
+      max-height: 300px;
+      display: grid;
+      place-items: center;
+      color: var(--hkust-navy);
+      font-weight: 700;
+      overflow: hidden;
+      background: transparent;
+      border: none;
+    }
+
+    .bio-photo:empty {
+      display: none;
+    }
+
+    .bio-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bio-photo img:not([src]),
+    .bio-photo img[src=""] {
+      display: none;
+    }
+
+    .contact-stack { display: grid; gap: 6px; font-size: 1rem; color: var(--text); }
+    .contact-stack .title { font-weight: 700; color: var(--hkust-blue); }
+    .contact-item { display: inline-flex; align-items: center; gap: 8px; }
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      color: var(--hkust-navy);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .card { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid rgba(11, 47, 106, 0.05); box-shadow: none; }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin-top: 0;
+    }
+
+    .list-item { padding: 0; border-radius: 0; background: transparent; border: none; box-shadow: none; display: block; color: var(--text); }
+
+    #news .list {
+      gap: 0px;
+    }
+
+    .news-date { color: var(--hkust-gold); font-weight: 400; margin-right: 8px; }
+    .list-item .headline { color: #263142; font-weight: 400; }
+    #news a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    #news a:hover {
+      text-decoration: underline;
+    }
+
+    .pub-card { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 0; border-radius: 0; background: transparent; border: none; box-shadow: none; }
+    .pub-thumb { border-radius: 10px; background: transparent; color: var(--hkust-navy); display: block; font-weight: 700; text-align: center; width: 180px; height: auto; overflow: visible; padding: 0; }
+    .pub-thumb.empty { background: transparent; border: none; }
+    .pub-thumb img { width: 100%; height: auto; display: block; }
+
+    .pub-card h3 {
+      margin: 0 0 6px;
+      color: var(--hkust-navy);
+    }
+
+    .pub-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .pub-title a:hover {
+      color: var(--hkust-blue);
+    }
+
+    .pub-meta {
+      color: #5c6270;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .pub-note {
+      color: #5c6270;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    .join-alert {
+      color: #c62828;
+      font-size: 1rem;
+    }
+
+    .join-alert a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .join-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .join-stack a {
+      color: inherit;
+    }
+
+    .join-stack p + p {
+      margin-top: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background: rgba(181, 138, 28, 0.16);
+      color: var(--hkust-navy);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1px solid rgba(181, 138, 28, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      line-height: 1.2;
+      text-decoration: none;
+    }
+
+    .tag:hover {
+      color: var(--hkust-blue);
+    }
+
+    .cta { text-align: center; padding: 22px; border-radius: 12px; border: 1px solid rgba(11, 47, 106, 0.05); background: #fff; box-shadow: none; }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto 40px;
+      padding: 18px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #5c6270;
+      border-top: 1px solid rgba(11, 47, 106, 0.14);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .pub-card { grid-template-columns: 1fr; }
+      .pub-thumb { min-height: 120px; }
+    }
+
+    @media (max-width: 700px) {
+      .hero-side { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">
+        <img class="brand-logo" src="Asset/logo.png" alt="HKUST(GZ) logo">
+        <span>Xin Yang</span>
+      </div>
+      <div class="nav-links">
+        <a href="#about" data-target="about">About</a>
+        <a href="#interests" data-target="interests">Research</a>
+        <a href="#news" data-target="news">News</a>
+        <a href="#publications" data-target="publications">Publications</a>
+        <a href="#join" data-target="join">Join Us</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="hero-side">
+        <div class="bio-photo">
+          <img src="Asset/Potrait.png" alt="Portrait of Xin Yang">
+        </div>
+        <div class="contact-stack">
+          <div class="title">Incoming Assistant Professor, HKUST(GZ)</div>
+          <div class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M2 6.5C2 5.12 3.12 4 4.5 4h15c1.38 0 2.5 1.12 2.5 2.5v11c0 1.38-1.12 2.5-2.5 2.5h-15C3.12 20 2 18.88 2 17.5v-11Zm2.5-.5c-.28 0-.5.22-.5.5v.3l8 4.5 8-4.5v-.3c0-.28-.22-.5-.5-.5h-15Zm15 12c.28 0 .5-.22.5-.5v-8.08l-7.45 4.19a1 1 0 0 1-.98 0L5 9.92V18c0 .28.22.5.5.5h14Z"/></svg>
+            <span>xiny@hkust-gz.edu.cn</span>
+          </div>
+          <div class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></svg>
+            <span>Nansha, Guangzhou, P. R. China</span>
+          </div>
+          <div class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path d="M12 3 1 9l11 6 11-6-11-6Zm0 8.9L5.25 8.97 12 5.62l6.75 3.35L12 11.9Z"/>
+              <path d="M6 12.74v2.2L12 19l6-4.06v-2.2L12 16.2 6 12.74Z"/>
+            </svg>
+            <a href="https://scholar.google.com/citations?user=565p6AkAAAAJ&hl" target="_blank" style="color: var(--hkust-blue); text-decoration: none;">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-name">Xin Yang (<span class="hero-name-cn">杨锌</span>)</div>
+        <p>
+          I am an incoming Assistant Professor at the Hong Kong University of Science and Technology (Guangzhou) and currently a postdoctoral researcher at Rice University. Prior to this, I was a postdoctoral researcher at the University of Pennsylvania (2023–2025). I received my Ph.D. in Electrical and Computer Engineering from the National University of Singapore in 2023 and my bachelor’s degree from the University of Electronic Science and Technology of China (UESTC).
+          </p>
+      </div>
+    </section>
+
+    <section id="interests">
+      <h2>Research Interests</h2>
+      <p>My research aims to advance wireless technologies to address real-world challenges in human health and improve quality of life. My recent work focuses on developing radio-frequency hardware systems and AI-driven signal processing algorithms that enable accurate, efficient, and unobtrusive healthcare anywhere, anytime. My research topics include non-contact sensing, flexible bioelectronics, edge computing, and the fabrication and integration of biomedical devices.</p>
+    </section>
+
+    <p class="join-alert">I’m always looking for motivated and creative postdocs, PhD students, RAs, and visiting students to join my group. For details, please see <a href="#join">Join Us</a>. Thank you!</p>
+    </p>
+
+    <section id="news">
+      <h2>News</h2>
+      <div class="list">
+        <div class="list-item">
+          <span class="news-date">02/2026</span><span class="headline">Our paper, “Three-dimensional printing of nanomaterials-based electronics with a metamaterial-inspired near-field electromagnetic structure,” is now available online in <a href="https://www.science.org/doi/full/10.1126/sciadv.adz7415" target="_blank" rel="noopener noreferrer"><em>Science Advances</em></a>!</span>
+        </div>
+        <div class="list-item">
+          <span class="news-date">10/2025</span><span class="headline">Our paper, "Motion Capture with Millimeter-Wave Tags" has been accepted by <a href="https://sensys.acm.org/2026/" target="_blank" rel="noopener noreferrer"><em>SenSys 2026</em></a>!</span>
+        </div>
+        <div class="list-item">
+          <span class="news-date">05/2025</span><span class="headline">Presented our mmWave smart glasses work at ARVO 2025 (Salt Lake City, UT).</span>
+        </div>
+        <div class="list-item">
+          <span class="news-date">02/2025</span><span class="headline">Our <a href="https://dl.acm.org/doi/abs/10.1145/3711875.3729150" target="_blank" rel="noopener noreferrer">BlinkWise paper</a> has been accepted by <a href="https://www.sigmobile.org/mobisys/2025/" target="_blank" rel="noopener noreferrer"><em>ACM MobiSys 2025</em></a>!</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <p class="pub-note"># Co-primary authors   * Co-corresponding authors</p>
+      <div class="list">
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/mo3cap.jpg">
+          </div>
+          <div>
+            <h3>Motion Capture with Millimeter-Wave Tags</h3>
+            <div class="pub-meta"><strong>Xin Yang</strong>, Yifei Liu, Yunshuang Li, Yao Gong, Dinesh Jayaraman, Omid Abari, and Mingmin Zhao</div>
+            <p><strong><em>SenSys 2026</em></strong>, Saint-Malo, France, May 2026</p>
+            <div class="tags"></div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/META-NFS.png">
+          </div>
+          <div>
+            <h3>Three-dimensional printing of nanomaterials-based electronics with a metamaterial-inspired near-field electromagnetic structure</h3>
+            <div class="pub-meta">Jian Teng#, Samuel H. Hales#, <strong>Xin Yang#</strong>, Jared Anklam#, Saebom Lee#, Yu Liu, Dwipak Prasad Sahu, Leibin Li, Cordelia Latham, Xi Tian, John S. Ho*, and Yong Lin Kong*</div>
+            <p><strong><em>Science Advances</em></strong>, 12(6), eadz7415, 2026</p>
+            <div class="tags">
+              <a class="tag" href="https://www.science.org/doi/full/10.1126/sciadv.adz7415" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/BlinkWise.png">
+          </div>
+          <div>
+            <h3>Tracking Blink Dynamics and Mental States on Glasses</h3>
+            <div class="pub-meta">Dongyin Hu, <strong>Xin Yang*</strong>, Yuh Ahhyun, Zihao Wang, Insup Lee, Al-Aswad Lama, and Mingmin Zhao*</div>
+            <p><strong><em>ACM MobiSys 2025</em></strong>, Anaheim, CA, June 2025</p>
+            <div class="tags">
+              <a class="tag" href="https://dl.acm.org/doi/abs/10.1145/3711875.3729150" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/ARVO.jpg">
+          </div>
+          <div>
+            <h3>Tracking Blink Dynamics on Smart Glasses Using mmWave Radar</h3>
+            <div class="pub-meta"><strong>Xin Yang</strong>, Dongyin Hu, Ahhyun Yuh, Zihao Wang, Lama Al-Aswad, Insup Lee, and Mingmin Zhao</div>
+            <p><strong><em>The Association for Research in Vision and Ophthalmology 2025 Annual Meeting</em></strong>, Salt Lake City, UT, May 2025</p>
+            <div class="tags"></div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/engulf_printing.png">
+          </div>
+          <div>
+            <h3>Soft electronics based on particle engulfment printing</h3>
+            <div class="pub-meta">Rongzhou Lin*, Chengmei Jiang, Sippanat Achavananthadith, <strong>Xin Yang</strong>, Hashina Parveen Anwar Ali, Jianfeng Ping, Yuxin Liu, Xianmin Zhang, Benjamin C. K. Tee, Yong Lin Kong*, John S Ho*</div>
+            <p><strong><em>Nature Electronics</em></strong>, 8(2), 127-134, 2025</p>
+            <div class="tags">
+              <a class="tag" href="https://www.nature.com/articles/s41928-024-01291-0" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+          <img src="pic_pulications/body_fiber.png"></div>
+          <div>
+            <h3>Single body-coupled fiber enables chipless textile electronics</h3>
+            <div class="pub-meta">Weifeng Yang, Shaomei Lin, Wei Gong, Rongzhou Lin, Chengmei Jiang, <strong>Xin Yang</strong>, Yunhao Hu, Jingjie Wang, Xiao Xiao, Kerui Li,  Yaogang Li, Qinghong Zhang, John S Ho, Yuxin Liu, Chengyi Hou*, and Hongzhi Wang*</div>
+            <p><strong><em>Science</em></strong>, 384(6691), 74-81, 2024</p>
+            <div class="tags">
+              <a class="tag" href="https://www.science.org/doi/10.1126/science.adk3755" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+          <img src="pic_pulications/two-port_rectenna.png"></div>
+          <div>
+            <h3>Highly integrated two-port rectenna system for wirelessly powering multisite autonomous vascular implantable networks</h3>
+            <div class="pub-meta">Jungang Zhang*, Mahmoud Wagih, <strong>Xin Yang</strong>, Rupam Das, Huxi Wang, Nosrat Mirzai, John Mercer, John S. Ho, and Hadi Heidari*</div>
+            <p><strong><em>IEEE Transactions on Microwave Theory and Techniques</em></strong>, 73(6), 3655-3666, 2024</p>
+            <div class="tags">
+              <a class="tag" href="https://ieeexplore.ieee.org/abstract/document/10753012" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/transparent_WSN.png"></div>
+          <div>
+            <h3>Digitally-defined ultrathin transparent wireless sensor network for room-scale imperceptible ambient intelligence</h3>
+            <div class="pub-meta">Yunxia Jin, Mengxia Yu, Dat T. Nguyen, <strong>Xin Yang</strong>, Zhipeng Li, Ze Xiong, Chenhui Li, Yuxin Liu, Yong Lin Kong*, and John S. Ho*</div>
+            <p><strong><em>npj Flexible Electronics</em></strong>, 8(1), 10, 2024</p>
+            <div class="tags">
+              <a class="tag" href="https://www.nature.com/articles/s41528-024-00293-4" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/Implant_network.png"></div>
+            <div>
+            <h3>Implant-to-implant wireless networking with metamaterial textiles</h3>
+            <div class="pub-meta">Xi Tian*, Qihang Zeng, Selman A. Kurt, Renee R. Li, Dat T. Nguyen, Ze Xiong, Zhipeng Li, <strong>Xin Yang</strong>, Xiao Xiao, Changsheng Wu, Benjamin CK Tee, Denys Nikolayev, Christopher J Charles, and John S Ho*</div>
+            <p><strong><em>Nature Communications</em></strong>, 14(1), 4335, 2023</p>
+            <div class="tags">
+              <a class="tag" href="https://www.nature.com/articles/s41467-023-39850-2" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/EP_sensing.png"></div>
+          <div>
+            <h3>Stochastic exceptional points for noise-assisted sensing</h3>
+            <div class="pub-meta">Zhipeng Li, Chenhui Li, Ze Xiong, Guoqiang Xu, Yongtai Raymond Wang, Xi Tian, <strong>Xin Yang</strong>, Zhu Liu, Qihang Zeng, Rongzhou Lin,  Ying Li, Jason Kai Wei Lee, John S Ho*, Cheng-Wei Qiu*</div>
+            <p><strong><em>Physical Review Letters</em></strong>, 130(22), 227201, 2023</p>
+            <div class="tags">
+              <a class="tag" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.130.227201" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb empty">
+            <img src="pic_pulications/mmwave_lsp_sensing.png"></div>
+          <div>
+            <h3>Non-contact mmWave physiological sensor in eyewear based on spoof localized surface plasmons</h3>
+            <div class="pub-meta"><strong>Xin Yang</strong>, Selman A. Kurt, Qihang Zeng, Xi Tian, Mingmin Zhao, and John S. Ho</div>
+            <p><strong><em>IEEE/MTT-S International Microwave Symposium - IMS 2023</em></strong> ,San Diego, CA, USA, 975-978, 2023</p>
+            <div class="tags">
+              <a class="tag" href="https://ieeexplore.ieee.org/abstract/document/10188017" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb">
+            <img src="pic_pulications/wearable_lsp.png"></div>
+          <div>
+            <h3>Localized surface plasmons on textiles for non-contact vital sign sensing</h3>
+            <div class="pub-meta"><strong>Xin Yang#</strong>, Xi Tian#, Qihang Zeng, Zhipeng Li, Dat T. Nguyen, and John S. Ho*</div>
+            <p><strong><em>IEEE Transactions on Antennas and Propagation</em></strong>, 70(9), 8507-8517, 2022</p>
+            <div class="tags">
+              <a class="tag" href="https://ieeexplore.ieee.org/abstract/document/9789579" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="pub-card">
+          <div class="pub-thumb empty">
+            <img src="pic_pulications/wireless_suture.png"></div>
+          <div>
+            <h3>Wirelessly operated bioelectronic sutures for the monitoring of deep surgical wounds</h3>
+            <div class="pub-meta">Viveka Kalidasan#, <strong>Xin Yang#</strong>, Ze Xiong#, Renee R. Li, Haicheng Yao, Hareesh Godaba, Sybil Obuobi, Priti Singh, Xin Guan, Xi Tian, , Selman A Kurt, Zhipeng Li, Devika Mukherjee, Ravisankar Rajarethinam, Choon Seng Chong, Jiong-Wei Wang, Pui Lai Rachel Ee, Weiqiang Loke, Benjamin CK Tee, Jianyong Ouyang, Christopher J Charles, and John S Ho*</div>
+            <p><strong><em>Nature Biomedical Engineering</em></strong>, 5(10), 1217-1227, 2021</p>
+            <div class="tags">
+              <a class="tag" href="https://www.nature.com/articles/s41551-021-00802-0" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-thumb empty">
+            <img src="pic_pulications/lsp_sensor.png"></div>
+          <div>
+            <h3>Wearable Radio-frequency Plasmonic Resonance Sensor for Non-contact Vital Sign Monitoring</h3>
+            <div class="pub-meta"><strong>Xin Yang</strong>, Xi Tian, and John S. Ho</div>
+            <p><strong><em>IEEE International Symposium on Antennas and Propagation and USNC-URSI Radio Science Meeting (APS/URSI),</em></strong>, Singapore, 1261-1262, 2021</p>
+            <div class="tags">
+              <a class="tag" href="https://ieeexplore.ieee.org/abstract/document/9704478" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <section id="join">
+      <h2>Join Us</h2>
+      <div class="join-stack">
+        <div>
+          <h3>PhD Students /RAs /Visiting Students</h3>
+          <p>I’m recruiting highly motivated  students interested in interdisciplinary research spanning hardware design, algorithm development, and real-world medical deployment. Applicants from ECE, CS, or related fields are welcome. Experience in any of the following areas (or closely related fields) is a plus: EM metamaterials, antennas/RF, mobile systems, signal processing, wireless communications, embedded systems, and applied machine learning for sensing/signal processing.</p>
+          <p> If you’d like to apply, please  <a href="mailto:xiny@hkust-gz.edu.cn">email</a> me your name, current institution, and position of interest, along with: (1) your CV, (2) a copy of your transcripts, and (3) a short summary of your background and research interests.</p>
+          <p>For more details about the PhD application process, please refer to the <a href="https://fytgs.hkust-gz.edu.cn/admissions/before-submitting-an-application/documents-required/" target="_blank" rel="noopener noreferrer"> HKUST(GZ) admissions page</a>. For more details about the Visiting Students application process, please refer to the <a href="https://fytgs.hkust-gz.edu.cn/short-term/visiting-research-students" target="_blank" rel="noopener noreferrer"> HKUST(GZ) visit research students page</a>.</p>
+        </div>
+        <div>
+          <h3>Postdocs</h3>
+          Welcome applications from innovative researchers interested in building next-generation systems for wireless sensing and wearable/implantable bioelectronics. Specific research topics will be co-developed to match the candidate’s strengths and our group’s priorities. Applicants with a Ph.D. in Electrical Engineering, Materials Science, Biomedical Engineering, Computer Science, or a closely related field are encouraged to apply. </div>
+          <p>If you’re interested in joining our team, please <a href="mailto:xiny@hkust-gz.edu.cn">email</a> me to learn more and discuss potential opportunities.</p>
+          <div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Xin Yang</span>
+  </footer>
+  <script>
+    document.querySelectorAll(".nav-links a[data-target]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const target = document.getElementById(link.dataset.target);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
