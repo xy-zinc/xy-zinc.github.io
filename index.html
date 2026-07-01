@@ -232,7 +232,14 @@
       gap: 0px;
     }
 
-    .news-date { color: var(--hkust-gold); font-weight: 400; margin-right: 8px; }
+    #news .list-item {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      column-gap: 8px;
+      align-items: start;
+    }
+
+    .news-date { color: var(--hkust-gold); font-weight: 400; margin-right: 0; }
     .list-item .headline { color: #263142; font-weight: 400; }
     #news a {
       color: inherit;
@@ -466,6 +473,9 @@
       <h2>News</h2>
       <div class="list">
         <div class="list-item">
+          <span class="news-date">04/2026</span><span class="headline">Our collaborative paper, “A battery-free wireless epidermal sensor network for continuous systolic blood pressure monitoring,” has been published in <a href="https://www.nature.com/articles/s41928-026-01597-1" target="_blank" rel="noopener noreferrer"><em>Nature Electronics</em></a>!</span>
+        </div>
+        <div class="list-item">
           <span class="news-date">02/2026</span><span class="headline">Our paper, “Three-dimensional printing of nanomaterials-based electronics with a metamaterial-inspired near-field electromagnetic structure,” is now available online in <a href="https://www.science.org/doi/full/10.1126/sciadv.adz7415" target="_blank" rel="noopener noreferrer"><em>Science Advances</em></a>!</span>
         </div>
         <div class="list-item">
@@ -507,7 +517,9 @@
             <h3>Motion Capture with Millimeter-Wave Tags</h3>
             <div class="pub-meta"><strong>Xin Yang</strong>, Yifei Liu, Yunshuang Li, Yao Gong, Dinesh Jayaraman, Omid Abari, and Mingmin Zhao</div>
             <p><strong><em>SenSys 2026</em></strong>, Saint-Malo, France, May 2026</p>
-            <div class="tags"></div>
+            <div class="tags">
+              <a class="tag" href="https://dl.acm.org/doi/10.1145/3774906.3800488" target="_blank" rel="noopener noreferrer">Paper</a>
+            </div>
           </div>
         </div>
 
